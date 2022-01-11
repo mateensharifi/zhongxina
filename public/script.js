@@ -220,15 +220,22 @@ showScore : function() {
   alert(window.localStorage.myHighScore);
 },
 
-startClick : document.getElementById("starter").addEventListener("click", startGame()),
+  startClick : document.getElementById("starter").addEventListener("click", this.startGame),
 
-redClick : document.getElementById("redButton").addEventListener("click", adjustArray1()),
+  redClick : document.getElementById("redButton").addEventListener("click", this.adjustArray1),
 
-blueClick : document.getElementById("blueButton").addEventListener("click", adjustArray3()),
+  blueClick : document.getElementById("blueButton").addEventListener("click", this.adjustArray3),
 
-yellowClick : document.getElementById("yellowButton").addEventListener("click", adjustArray4()),
+  yellowClick : document.getElementById("yellowButton").addEventListener("click", this.adjustArray4),
 
-greenClick : document.getElementById("greenButton").addEventListener("click", adjustArray2()),
+  greenClick : document.getElementById("greenButton").addEventListener("click", this.adjustArray2),
 
-scoreClick : document.getElementById("scoreBoard").addEventListener("click", showScore()),
+  scoreClick : document.getElementById("scoreBoard").addEventListener("click", this.showScore),
+
+All.startClick;
+All.redClick;
+All.blueClick;
+All.yellowClick;
+All.greenClick;
+All.scoreClick;
 }
