@@ -1,193 +1,182 @@
+let simon = {
+  red : document.getElementById("redButton"),
+  green : document.getElementById("greenButton"),
+  blue : document.getElementById("blueButton"),
+  yellow : document.getElementById("yellowButton"),
+  sheesh : new Audio('sheesh.mp3'),
+  gameCounter : 0,
+  userCounter : 0,
+  scoreCounter : 0,
+  alive : false,
+  userArray : new Array (100),
+  answers : new Array(100),
+  localColor : 0,
 
+test : function() {
+    simon.red.classList.remove('redDerp');
+},
 
-var element1 = document.getElementById("redButton")
-var element2 = document.getElementById("greenButton")
-var element3 = document.getElementById("blueButton")
-var element4 = document.getElementById("yellowButton")
-var audio = new Audio('sheesh.mp3');
-var gameCounter = 0;
-var userCounter = 0;
-var scoreCounter = 0;
-var alive = false;
-var userArray = new Array (100);
-let answers = new Array(100);
-var localColor = 0;
-
-function test ()
-{
-    element1.classList.remove('redDerp');
-}
-
-function getRandomInt(min, max) {
+getRandomInt : function(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-}
+  console.log(Math.floor(Math.random() * (max - min) + min)); //The maximum is exclusive and the minimum is inclusive
+},
 
-function setAnswers() {
+answers : function() {
   for (let i = 0; i < 100; i++) {
-    answers[i] = getRandomInt(1, 5);
+    simon.answers[i] = getRandomInt(1, 5);
   }
-  alive = true;
-}
+  simon.alive = true;
+},
 
-function flashRed()
-{
-  element1.classList.remove('redDerp');
-  element1.classList.add('redLight');
-  setTimeout(function () {element1.classList.remove('redLight')}, 900);
-  setTimeout(function () {element1.classList.add('redDerp')}, 900);
-}
+flashRed : function() {
+  simon.red.classList.remove('redDerp');
+  simon.red.classList.add('redLight');
+  setTimeout(function () {simon.red.classList.remove('redLight')}, 900);
+  setTimeout(function () {simon.red.classList.add('redDerp')}, 900);
+},
 
-function flashGreen()
-{
-  element2.classList.remove('greenDerp');
-  element2.classList.add('greenLight');
-  setTimeout(function () {element2.classList.remove('greenLight')}, 900);
-  setTimeout(function () {element2.classList.add('greenDerp')}, 900);
-}
-function flashBlue()
-{
-  element3.classList.remove('blueDerp');
-  element3.classList.add('blueLight');
-  setTimeout(function () {element3.classList.remove('blueLight')}, 900);
-  setTimeout(function () {element3.classList.add('blueDerp')}, 900);
-}
-function flashYellow()
-{
-  element4.classList.remove('yellowDerp');
-  element4.classList.add('yellowLight');
-  setTimeout(function () {element4.classList.remove('yellowLight')}, 900);
-  setTimeout(function () {element4.classList.add('yellowDerp')}, 900);
-}
+flashGreen : function() {
+  simon.green.classList.remove('greenDerp');
+  simon.green.classList.add('greenLight');
+  setTimeout(function () {simon.green.classList.remove('greenLight')}, 900);
+  setTimeout(function () {simon.green.classList.add('greenDerp')}, 900);
+},
 
-function showPattern () {
-  gameCounter++;
-  for (let i = 0; i < gameCounter; i++)
+flashBlue : function() {
+  simon.blue.classList.remove('blueDerp');
+  simon.blue.classList.add('blueLight');
+  setTimeout(function () {simon.blue.classList.remove('blueLight')}, 900);
+  setTimeout(function () {simon.blue.classList.add('blueDerp')}, 900);
+},
+
+flashYellow : function() {
+  simon.yellow.classList.remove('yellowDerp');
+  simon.yellow.classList.add('yellowLight');
+  setTimeout(function () {simon.yellow.classList.remove('yellowLight')}, 900);
+  setTimeout(function () {simon.yellow.classList.add('yellowDerp')}, 900);
+},
+
+showPattern : function () {
+  simon.gameCounter++;
+  for (let i = 0; i < simon.gameCounter; i++)
   {
-      setTimeout(function () {flashColor(answers[i])}, 2000*(i+1));
+      setTimeout(function () {flashColor(simon.answers[i])}, 2000*(i+1));
   }
   let emptyArray = new Array(100);
-  userArray = emptyArray;
-  userCounter = 0;
-}
+  simon.userArray = emptyArray;
+  simon.userCounter = 0;
+},
 
 
-function startGame() {
-  if (alive == false)
+startGame : function() {
+  if (simon.alive == false)
   {
-    setAnswers();
+    setsimon.answers();
     showPattern();
   }
-}
+},
 
-function adjustArray1 ()
-{
-  localColor = 1;
-  if (alive == true && gameCounter != userCounter)
+adjustArray1 : function () {
+  simon.localColor = 1;
+  if (simon.alive == true && simon.gameCounter != simon.userCounter)
   {
       addPress();
-      if (gameCounter == userCounter && arrayMatch() == false)
+      if (simon.gameCounter == simon.userCounter && arrayMatch() == false)
       {
-        alive = false;
-        if (scoreCounter > window.localStorage.myHighScore)
+        simon.alive = false;
+        if (simon.scoreCounter > window.localStorage.myHighScore)
         {
-          window.localStorage.myHighScore = scoreCounter;
+          window.localStorage.myHighScore = simon.scoreCounter;
         }
-        audio.play();
+        simon.sheesh.play();
         reset();
       }
-      else if (gameCounter == userCounter && arrayMatch() == true)
+      else if (simon.gameCounter == simon.userCounter && arrayMatch() == true)
       {
-      scoreCounter++;
+      simon.scoreCounter++;
       showPattern();
       }
   }
-}
-function adjustArray2 ()
-{
-  localColor = 2;
-  if (alive == true && gameCounter != userCounter)
+},
+
+adjustArray2 : function () {
+  simon.localColor = 2;
+  if (simon.alive == true && simon.gameCounter != simon.userCounter)
   {
       addPress();
-      if (gameCounter == userCounter && arrayMatch() == false)
+      if (simon.gameCounter == simon.userCounter && arrayMatch() == false)
       {
-        alive = false;
-        if (scoreCounter > window.localStorage.myHighScore)
+        simon.alive = false;
+        if (simon.scoreCounter > window.localStorage.myHighScore)
         {
-          window.localStorage.myHighScore = scoreCounter;
+          window.localStorage.myHighScore = simon.scoreCounter;
         }
-        audio.play();
+        simon.sheesh.play();
         reset();
       }
-      else if (gameCounter == userCounter && arrayMatch() == true)
+      else if (simon.gameCounter == simon.userCounter && arrayMatch() == true)
       {
-      scoreCounter++;
+      simon.scoreCounter++;
       showPattern();
       }
   }
-}
+},
 
-function adjustArray3 ()
-{
-  localColor = 3;
-  if (alive == true && gameCounter != userCounter)
+adjustArray3 : function () {
+  simon.localColor = 3;
+  if (simon.alive == true && simon.gameCounter != simon.userCounter)
   {
       addPress();
-      if (gameCounter == userCounter && arrayMatch() == false)
+      if (simon.gameCounter == simon.userCounter && arrayMatch() == false)
       {
-        alive = false;
-        if (scoreCounter > window.localStorage.myHighScore)
+        simon.alive = false;
+        if (simon.scoreCounter > window.localStorage.myHighScore)
         {
-          window.localStorage.myHighScore = scoreCounter;
+          window.localStorage.myHighScore = simon.scoreCounter;
         }
-        audio.play();
+        simon.sheesh.play();
         reset();
       }
-    if (gameCounter == userCounter && arrayMatch() == true)
+    if (simon.gameCounter == simon.userCounter && arrayMatch() == true)
       {
-      scoreCounter++;
+      simon.scoreCounter++;
       showPattern();
       }
   }
+},
 
-}
-
-function adjustArray4 ()
-{
-  localColor = 4;
-  if (alive == true && gameCounter != userCounter)
+adjustArray4 : function () {
+  simon.localColor = 4;
+  if (simon.alive == true && simon.gameCounter != simon.userCounter)
   {
       addPress();
-      if (gameCounter == userCounter && arrayMatch() == false)
+      if (simon.gameCounter == simon.userCounter && arrayMatch() == false)
       {
-        alive = false;
-        if (scoreCounter > window.localStorage.myHighScore)
+        simon.alive = false;
+        if (simon.scoreCounter > window.localStorage.myHighScore)
         {
-          window.localStorage.myHighScore = scoreCounter;
+          window.localStorage.myHighScore = simon.scoreCounter;
         }
-        audio.play();
+        simon.sheesh.play();
         reset();
       }
-      if (gameCounter == userCounter && arrayMatch() == true)
+      if (simon.gameCounter == simon.userCounter && arrayMatch() == true)
       {
-      scoreCounter++;
+      simon.scoreCounter++;
       showPattern();
       }
   }
+},
 
-}
 
+addPress : function() {
+    flashColor(simon.localColor);
+    simon.userArray[simon.userCounter] = simon.localColor;
+    simon.userCounter++;
+},
 
-function addPress()
-{
-    flashColor(localColor);
-    userArray[userCounter] = localColor;
-    userCounter++;
-}
-
-function flashColor (flash)
-{
+flashColor : function(flash) {
   switch(flash)
   {
     case 1:
@@ -203,40 +192,43 @@ function flashColor (flash)
     flashYellow();
     break;
   }
-}
+},
 
-function arrayMatch()
-{
-  for (var i = 0; i < gameCounter; i++)
+arrayMatch : function() {
+  for (let i = 0; i < simon.gameCounter; i++)
   {
-    if (userArray[i] != answers[i])
+    if (simon.userArray[i] != simon.answers[i])
     {
       return false;
     }
   }
   return true;
-}
+},
 
-function reset()
-{
+reset : function() {
   empty = new Array (100);
-  answers = empty;
-  userArray = empty;
-  userCounter = 0;
-  gameCounter = 0;
-  scoreCounter = 0;
-  alive = false;
-  localColor = 0;
-}
+  simon.answers = empty;
+  simon.userArray = empty;
+  simon.userCounter = 0;
+  simon.gameCounter = 0;
+  simon.scoreCounter = 0;
+  simon.alive = false;
+  simon.localColor = 0;
+},
 
-function showScore  ()
-{
+showScore : function() {
   alert(window.localStorage.myHighScore);
-}
+},
 
-document.getElementById("starter").addEventListener("click", startGame);
-document.getElementById("redButton").addEventListener("click", adjustArray1);
-document.getElementById("blueButton").addEventListener("click", adjustArray3);
-document.getElementById("yellowButton").addEventListener("click", adjustArray4);
-document.getElementById("greenButton").addEventListener("click", adjustArray2);
-document.getElementById("scoreBoard").addEventListener("click", showScore);
+startClick : document.getElementById("starter").addEventListener("click", startGame()),
+
+redClick : document.getElementById("redButton").addEventListener("click", adjustArray1()),
+
+blueClick : document.getElementById("blueButton").addEventListener("click", adjustArray3()),
+
+yellowClick : document.getElementById("yellowButton").addEventListener("click", adjustArray4()),
+
+greenClick : document.getElementById("greenButton").addEventListener("click", adjustArray2()),
+
+scoreClick : document.getElementById("scoreBoard").addEventListener("click", showScore()),
+}
